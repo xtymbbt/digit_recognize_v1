@@ -67,7 +67,7 @@ num_labels = 10          # 10 labels, from 1 to 10
 theta = np.zeros((input_layer_size, num_labels))
 
 # initialize lambda
-lambda_ = 3
+lambda_ = 0.1
 # compute cost and gradient using the 2D cost function
 J, grad = cost_function2d(theta, X_train, Y_train, lambda_)
 print("Epoch 0: J = ", J)
@@ -78,15 +78,15 @@ accuracy_train = np.sum(((h-Y_train_orig) == 0)+0) / Y_train_orig.shape[0]
 print("The train set's accuracy is: ", accuracy_train)
 
 # initialize delta_J as a learning rate
-delta_J = 1
+delta_J = 0.01
 
 # update theta automatically in a for loop
-for i in range(2):
+for i in range(1000):
     theta = theta - (delta_J * np.linalg.pinv(grad)).T
     J_prev = J
     J, grad = cost_function2d(theta, X_train, Y_train, lambda_)
-    if J > J_prev:
-        delta_J = delta_J/10
+    # if J > J_prev:
+    #     delta_J = delta_J/10
     print("Epoch ", (i+1), ":")
     print("J = ", J)
     print("grad = ", grad)
